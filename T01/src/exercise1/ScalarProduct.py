@@ -21,7 +21,6 @@ def main_service():
 
 def main():
     main_service()
-#    read_vector()
 
 if __name__ == "__main__":
     main()
