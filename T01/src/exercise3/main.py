@@ -2,7 +2,8 @@ import sys
 import field
 
 def read_field():
-    return map(list, sys.stdin.readlines())
+    str = sys.stdin.readlines()
+    return list(map(list, [i.replace(" ", "") for i in str]))
 
 def main():
     s21_field = field.Field(read_field())
