@@ -1,4 +1,3 @@
-from array import *
 
 def read_number():
     return int(input())
