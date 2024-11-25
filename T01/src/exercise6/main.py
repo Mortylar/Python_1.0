@@ -25,7 +25,7 @@ def sum_json(list1, list2):
             res.extend(flush(list2, j))
         if (j >= len(list2)):
             res.extend(flush(list1, i))
-    return res
+    return {'list0': res}
 
 def check_keys(source):
     for i in source:
