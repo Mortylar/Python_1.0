@@ -5,10 +5,9 @@ def read_float():
     dec_part = 0.0;
     sign = 1;
     ind = 0;
-    if (str[0] == '-'):
-        sign = -1;
-        ind = ind + 1;
-    if (str[0] == '+'):
+    while ((str[ind] == '+') or (str[ind] == '-')):
+        if (str[ind] == '-'):
+            sign *= -1;
         ind = ind + 1;
     while (str[ind] != '.'):
         check(str[ind]);
@@ -17,7 +16,7 @@ def read_float():
         if (ind >= len(str)):
             return sign * int_part * 1.0;
     for i in range(len(str) - 1, ind, -1):
-        if (str[ind] == "." or str[ind] == "+" or str[ind] == "-"):
+        if (str[i] == "." or str[i] == "+" or str[i] == "-"):
             raise Exception("Invalid Argument")
         check(str[i]);
         dec_part = dec_part/10 + (ord(str[i]) - ord("0"))/10;
@@ -36,8 +35,11 @@ def check(ch):
 
 
 def main():
-    f = 2 * read_float()
-    print(f)
+    try:
+        f = 2 * read_float()
+        print('%.3f' % f)
+    except Exception:
+        print("Invalid Argument");
 
 if __name__ == "__main__":
     main();
