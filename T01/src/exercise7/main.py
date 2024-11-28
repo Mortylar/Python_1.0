@@ -12,19 +12,19 @@ class Field:
 
     def get_data(self):
         return self.__data;
+   
+    def get_max_count(self):
+        return self.__rec_count_max(0, 0)
 
-    def print(self):
-        for i in range(0, self.__rows):
-            for j in range(0, self.__cols):
-                print(self.__data[i][j])
-
-
-
-
-
-
-
-
+    def __rec_count_max(self, row, col):
+        down = 0
+        right = 0
+        if (row == self.__rows) or (col == self.__cols):
+            return 0
+        if (row < self.__rows) and (col < self.__cols):
+            right = self.__rec_count_max(row, col + 1) 
+            down = self.__rec_count_max(row + 1, col)
+            return self.__data[row][col] + max(down, right)
 
 
 def read_field():
@@ -34,7 +34,6 @@ def read_field():
         data.append(read_line())
     field =  Field(size[0], size[1]);
     field.set_data(data);
-    field.print()
     return field;
 
 
@@ -45,7 +44,7 @@ def read_line():
 
 def main():
     field = read_field();
-    print(field.get_data());
+    print(field.get_max_count())
 
 
 if __name__ == "__main__":
