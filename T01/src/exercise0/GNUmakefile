@@ -1,0 +1,7 @@
+
+INTERPRETER=python3
+TARGET=Hello.py
+
+run:
+	$(INTERPRETER) $(TARGET)
+
