@@ -37,13 +37,13 @@ class ApparatList:
             return True
         return False
 
-    def count_min_price_by_time(time):
-        price = -1
+    def count_min_price_by_time(self, time):
+        price = 0x01111111111111111
         for i in range(0, len(self.__data)):
             for j in range(i + 1, len(self.__data)):
-                if (self.__data[i].get_time() + self.data[j].get_time() >= time):
+                if (self.__data[i].get_time() + self.__data[j].get_time() >= time):
                     tmp_price = self.__data[i].get_price() + self.__data[j].get_price()
-                    if (tmp_price > price):
+                    if (tmp_price < price):
                         price = tmp_price
         return price
 
@@ -61,6 +61,15 @@ class ApparatsService:
         self.__apparats.append(ApparatList(apparat))
         return
 
+    def count_min_price(self):
+        min_price = 0x01111111111111111
+        for i in self.__apparats:
+            cur_price = i.count_min_price_by_time(self.__total_time);
+            if (cur_price < min_price):
+                min_price = cur_price
+        return min_price
+
+
     def __read_header(self):
         header_list = input().split(" ")
         self.__count = (int)(header_list[0])
@@ -70,14 +79,14 @@ class ApparatsService:
         self.__read_header()
         for i in range(0, self.__count):
             self.add_apparat(Apparat(list(map(int, input().split(" ")))))
-        print(self.__count)
-        print(self.__total_time)
-        for a in self.__apparats:
-            a.print()
 
 def main():
-    ap = ApparatsService()
-    ap.read()
+    try:
+        ap = ApparatsService()
+        ap.read()
+        print(ap.count_min_price())
+    except Exception as e:
+        print(repr(e))
 
 if __name__ == "__main__":
     main()
