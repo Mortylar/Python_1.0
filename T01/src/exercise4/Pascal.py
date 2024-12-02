@@ -32,6 +32,8 @@ def main():
         print_pascal_line(number)
     except ValueError:
         print('Natural number was expected')
+    except RecursionError as e:
+        print(repr(e))
 
 
 if __name__ == "__main__":
